@@ -1,0 +1,64 @@
+// Morse code representation of the name BEN
+const int dotDelay = 250; // Duration of a dot in milliseconds
+const int dashDelay = 3 * dotDelay; // Duration of a dash (3 times longer than dot)
+const int letterGap = 3 * dotDelay; // Gap between letters
+const int wordGap = 7 * dotDelay; // Gap between words
+const int buttonPin = 2; // Pin number for the push button
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT); // initialize digital pin LED_BUILTIN as an output
+  pinMode(buttonPin, INPUT_PULLUP); // initialize push button pin as an input with internal pull-up resistor
+}
+
+void loop() {
+  // Check if the button is pressed
+  if (digitalRead(buttonPin) == LOW) {
+    // Blink the name "BEN" in Morse code
+    blinkB();
+    delay(wordGap);
+    blinkE();
+    delay(wordGap);
+    blinkN();
+    delay(wordGap);
+  }
+}
+
+// Function to blink a dot
+void blinkDot() {
+  digitalWrite(LED_BUILTIN, HIGH); // turn the LED on
+  delay(dotDelay); // wait for a dot duration
+  digitalWrite(LED_BUILTIN, LOW); // turn the LED off
+  delay(dotDelay); // wait for a dot duration (for spacing)
+}
+
+// Function to blink a dash
+void blinkDash() {
+  digitalWrite(LED_BUILTIN, HIGH); // turn the LED on
+  delay(dashDelay); // wait for a dash duration
+  digitalWrite(LED_BUILTIN, LOW); // turn the LED off
+  delay(dotDelay); // wait for a dot duration (for spacing)
+}
+
+// Morse code representation functions for the letters B, E, and N
+void blinkB() {
+  // B: - . . . (dash-dot-dot-dot)
+  blinkDash();
+  delay(letterGap);
+  blinkDot();
+  delay(letterGap);
+  blinkDot();
+  delay(letterGap);
+  blinkDot();
+}
+
+void blinkE() {
+  // E: . (dot)
+  blinkDot();
+}
+
+void blinkN() {
+  // N: - . (dash-dot)
+  blinkDash();
+  delay(letterGap);
+  blinkDot();
+}
